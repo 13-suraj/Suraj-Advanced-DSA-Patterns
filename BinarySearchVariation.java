@@ -1,4 +1,4 @@
-public class BSAlgo {
+public class BinarySearchVariation {
 
     public static int binarySearch(int[] arr, int target, int start, int end) {    // Iterative Binary Search Algorithm
         while(start <= end) {
@@ -79,8 +79,8 @@ public class BSAlgo {
 
             if(mid < end && arr[mid] > arr[mid + 1]) return mid;
             if(mid > start && arr[mid] < arr[mid - 1]) return mid - 1;
-            if(arr[mid] <= arr[start]) end = mid - 1;
-            else start = mid + 1;
+            if(arr[mid] > arr[start]) start = mid + 1;
+            else end = mid - 1;
         }
         return -1; // It means Array is not Rotated, it is normally sorted.
     }
@@ -105,19 +105,19 @@ public class BSAlgo {
     }
 
     public static void main(String[] args) {
-        int[] numbers = {22,20,17,14,11,7,4,1};  // Normal Sorted in Decreasing-Order
+        int[] numbers = {22,20,17,14,11,7,4,1};                          // Normal Sorted in Decreasing-Order
         System.out.println(binarySearchOrderAgnostic(numbers, 17,0,7));  // answer = 2
 
-        int[] num = {2,4,6,9,12,15,16};   // Normal Sorted in Increasing-Order
-        System.out.println(binarySearch(num, 9,0,6));  // answer = 3
-        System.out.println(floor(num, 13));                      // answer = 12
-        System.out.println(ceiling(num, 13));                    // answer = 15
+        int[] num = {2,4,6,9,12,15,16};                                   // Normal Sorted in Increasing-Order
+        System.out.println(binarySearch(num, 9,0,6));                     // answer = 3
+        System.out.println(floor(num, 13));                               // answer = 12
+        System.out.println(ceiling(num, 13));                             // answer = 15
 
-        int[] arr = {3,7,9,12,8,7,6};               // Mountain Array first half is sorted in Increasing-order & other half is in Decreasing-order.
+        int[] arr = {3,7,9,12,8,7,6};               // Mountain Array (first half is sorted in Increasing-order & other half is in Decreasing-order)
         System.out.println(peakOfMountain(arr));    // answer = 3
 
         int[] nums = {16,17,18,7,8,11,13,14};      // Rotated-Sorted Array
-        System.out.println(findPivot(nums));      // answer = 2
+        System.out.println(findPivot(nums));       // answer = 2
 
         int[] n = {16,17,17,17,7,8,8,11,12,12,14};    // Rotated-Sorted Array with Duplicates
         System.out.println(findPivotWithDuplicates(n));   // answer = 3
@@ -125,11 +125,14 @@ public class BSAlgo {
 }
 
 /* Note :-
+Difference between (start < end) & (start <= end) :-
     Use while(start < end) when start = mid, end = mid - 1;
     Use while(start < end) when start = mid + 1, end = mid;
-
+    
     Use while(start <= end) when start = mid + 1, end = mid - 1;
 
-    If you want the smallest maximum element :--- When the loop is over 'end' pointer will point to the answer.
-    If you want the greatest minimum element :--- When the loop is over 'start' pointer will point to the answer. 
+In the beginning of the loop,
+    if 'end' pointer was pointing to the possible answer :--- 'start' pointer will point to the answer after the loop is over.
+    if 'start' pointer was pointing to the possible answer :--- 'end' pointer will point to the answer after the loop is over. 
+
 */
