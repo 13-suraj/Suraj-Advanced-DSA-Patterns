@@ -132,7 +132,59 @@ public class BinarySearchVariation {
         }
         return 0; 
     }
+    
+    public static boolean searchMatrix(int[][] matrix, int target) {               // Search in 2D (Fully Sorted) Matrix
+        int m = matrix.length, n = matrix[0].length, l = 0, r = (m*n) - 1;
+        while(l <= r) {
+            int mid = l + ((r - l) / 2);
+            int row = mid / n;
+            int col = mid % n;
 
+            if(matrix[row][col] == target) return true;
+            else if(matrix[row][col] < target) l = mid + 1;
+            else r = mid - 1; 
+        }
+        return false;
+    }
+
+    public static boolean searchMatrixII(int[][] matrix, int target) {        // Search in 2D (Row-Wise) Sorted Matrix 
+        int n = matrix.length, m = matrix[0].length;
+        int row = 0, col = m - 1;
+        while(row < n && col >= 0) {
+            if(matrix[row][col] == target) return true;
+            else if(matrix[row][col] < target) row++;
+            else col--;
+        }
+        return false;
+    }
+
+    class Solution {
+    public int[] findPeakGrid(int[][] mat) {                    //  Returns Index of Peak Element of a 2D Matrix
+        int l = 0, r = mat[0].length - 1, mid = -1;
+        while(l <= r) {
+            mid = l + (r - l) / 2;
+            int row = maxElement(mat, mid);
+            int left = mid - 1 >= 0 ? mat[row][mid - 1] : -1;
+            int right = mid + 1 < mat[0].length ? mat[row][mid + 1] : -1;
+            if(mat[row][mid] > left && mat[row][mid] > right) return new int[] {row, mid};
+            else if(mat[row][mid] < left) r = mid - 1;
+            else l = mid + 1;
+        }
+        return new int[] {-1, -1};
+    }
+
+    public int maxElement(int[][] mat, int mid) {
+        int max = Integer.MIN_VALUE, idx = -1;
+        for(int i = 0; i < mat.length; i++) {
+            if(mat[i][mid] > max) {
+                max = mat[i][mid];
+                idx = i;
+            }
+        }
+        return idx;
+    }
+}
+    
     public static void main(String[] args) {
         int[] numbers = {22,20,17,14,11,7,4,1};                          // Normal Sorted in Decreasing-Order
         System.out.println(binarySearchOrderAgnostic(numbers, 17,0,7));  // answer = 2
@@ -165,4 +217,5 @@ In the beginning of the loop,
     if 'start' pointer was pointing to the possible answer :--- 'end' pointer will point to the answer after the loop is over. 
 
 */
+
 
