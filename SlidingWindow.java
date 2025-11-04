@@ -2,7 +2,7 @@ package SlidingWindow;
 
 public class SlidingWindow {
     public static int pattern1(int[] arr, int k) {                      // Fixed Size Window Problem
-        int max_sum = Integer.MAX_VALUE, sum = 0, l = 0, r = k - 1;
+        int max_sum = Integer.MIN_VALUE, sum = 0, l = 0, r = k - 1;
         for (int i = l; i <= r; i++) {
             sum += arr[i];
         }
@@ -85,4 +85,5 @@ public class SlidingWindow {
     - You're using greedy expansion based on positive sums (like Kadane’s algorithm logic).
     Example:
     Find the longest subarray with sum ≤ target.
+
 */
