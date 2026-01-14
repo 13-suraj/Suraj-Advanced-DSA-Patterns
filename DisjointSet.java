@@ -2,17 +2,17 @@ package Graphs;
 
 public class DisjointSet {
     int[] rank;
-    int[] parent;
     int[] size;
+    int[] parent;
 
     public DisjointSet(int n) {
-        for(int i = 0; i <= n; i++) {
-            rank = new int[n + 1];
-            parent = new int[n + 1];
-            size = new int[n + 1];
+        rank = new int[n + 1];
+        size = new int[n + 1];
+        parent = new int[n + 1];
+        for(int i = 0; i <= n; i++) {    
             rank[i] = 0;
-            parent[i] = i;
             size[i] = 1;
+            parent[i] = i;
         }
     }
 
@@ -55,3 +55,4 @@ public class DisjointSet {
         }
     }
 }
+
