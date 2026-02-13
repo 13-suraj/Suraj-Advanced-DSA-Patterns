@@ -1,5 +1,10 @@
-package SegmentTree;
-
+//
+For Sum-Query
+- Merge step: seg[ind] = seg[left] + seg[right]
+- Neutral value: 0 (instead of Integer.MAX_VALUE or Integer.MIN_VALUE)
+- Lazy propagation applies (high - low + 1) * val because each element in the segment is incremented.
+//
+    
 public class LazySTree {
     int[] seg, lazy;
     int n;
@@ -105,3 +110,4 @@ public class LazySTree {
         System.out.println(st.queryRange(1, 4)); // min in [1,4] → 4
     }
 }
+
